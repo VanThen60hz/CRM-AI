@@ -59,13 +59,13 @@ export default function App() {
           <SideBar />
         </Col>
         <Col span={16}>
-          {/* <Chat
+          <Chat
             navbar={{ title: "Assistant chat" }}
             messages={messages}
             renderMessageContent={renderMessageContent}
             placeholder="Type here..."
             onSend={handleSend}
-          /> */}
+          />
           <div class="ChatApp">
             <header class="Navbar">
               <div class="Navbar-left"></div>
@@ -79,7 +79,58 @@ export default function App() {
                 <div class="PullToRefresh-inner">
                   <div class="PullToRefresh-content">
                     <div class="PullToRefresh-indicator"></div>
-                    <div class="MessageList"></div>
+                    <div class="MessageList">
+                      <div
+                        class="Message right"
+                        data-id="blkutvfv26vi"
+                        data-type="text"
+                      >
+                        <div class="Message-meta">
+                          <time
+                            class="Time"
+                            datetime="2023-11-25T07:34:08.303Z"
+                          >
+                            {/* 14:34 */}
+                          </time>
+                        </div>
+                        <div class="Message-main">
+                          <div class="Message-inner">
+                            <div
+                              class="Message-content"
+                              role="alert"
+                              aria-live="assertive"
+                              aria-atomic="false"
+                            >
+                              <div class="Bubble text" data-type="text"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="Message left"
+                        data-id="_TYPING_"
+                        data-type="typing"
+                      >
+                        <div class="Message-main">
+                          <div class="Message-inner">
+                            <div
+                              class="Message-content"
+                              role="alert"
+                              aria-live="assertive"
+                              aria-atomic="false"
+                            >
+                              <div class="Bubble typing" data-type="typing">
+                                <div class="Typing" aria-busy="true">
+                                  <div class="Typing-dot"></div>
+                                  <div class="Typing-dot"></div>
+                                  <div class="Typing-dot"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -100,11 +151,12 @@ export default function App() {
                       <i class="fa-solid fa-wand-magic-sparkles"></i>
                     </button>
                     <textarea
-                      class="Input Input--outline Composer-input"
+                      className="Input Input--outline Composer-input"
                       type="text"
                       placeholder="Type here..."
                       rows="1"
                       enterkeyhint="send"
+                      // onKeyDown={handleSend}
                     ></textarea>
                   </div>
                 </div>
