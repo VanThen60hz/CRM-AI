@@ -7,6 +7,7 @@ import "./App.css";
 import { Row, Col } from "antd";
 
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function App() {
   const { messages, appendMsg, setTyping } = useMessages([]);
   const [cont, setcont] = useState("11111");
@@ -57,13 +58,48 @@ export default function App() {
           <SideBar />
         </Col>
         <Col span={16}>
-          <Chat
+          {/* <Chat
             navbar={{ title: "Assistant chat" }}
             messages={messages}
             renderMessageContent={renderMessageContent}
             placeholder="Type here..."
             onSend={handleSend}
-          />
+          /> */}
+          <div class="ChatApp">
+            <header class="Navbar">
+              <div class="Navbar-left"></div>
+              <div class="Navbar-main">
+                <h2 class="Navbar-title">Assistant chat</h2>
+              </div>
+              <div class="Navbar-right"></div>
+            </header>
+            <div class="MessageContainer" tabindex="-1">
+              <div class="PullToRefresh">
+                <div class="PullToRefresh-inner">
+                  <div class="PullToRefresh-content">
+                    <div class="PullToRefresh-indicator"></div>
+                    <div class="MessageList"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ChatFooter">
+              <div class="Composer">
+                <div class="Composer-inputWrap">
+                  <div class="">
+                    <p>abc</p>
+                    <textarea
+                      class="Input Input--outline Composer-input"
+                      type="text"
+                      placeholder="Type here..."
+                      rows="1"
+                      enterkeyhint="send"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </Col>
         <Col span={4}></Col>
       </Row>
