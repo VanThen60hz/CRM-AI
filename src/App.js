@@ -4,7 +4,8 @@ import Chat, { Bubble, useMessages } from "@chatui/core";
 import SideBar from "./components/Sidebar";
 import "@chatui/core/dist/index.css";
 import "./App.css";
-import { Row, Col } from "antd";
+import { BoldOutlined, Row, Col } from "antd";
+// import Info from "./components/Info";
 
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -87,7 +88,6 @@ export default function App() {
               <div class="Composer">
                 <div class="Composer-inputWrap">
                   <div class="">
-                    <p>abc</p>
                     <textarea
                       class="Input Input--outline Composer-input"
                       type="text"
@@ -101,10 +101,10 @@ export default function App() {
             </div>
           </div>
         </Col>
-        <Col span={4}></Col>
+        <Col span={4}>{/* <Info /> */}</Col>
       </Row>
 
-      {/* <div className="info"></div> */}
+      <div className="info"></div>
     </div>
   );
 }
