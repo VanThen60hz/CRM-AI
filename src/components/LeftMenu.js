@@ -6,7 +6,7 @@ import "./LeftMenu.css";
 const LeftMenu = () => {
   return (
     <div className="left-menu">
-      <div className="chat-icon">
+      <div className="chat-icon ">
         {/* <FontAwesomeIcon icon={faTelegram} /> */}
       </div>
       <div className="chat-icon">

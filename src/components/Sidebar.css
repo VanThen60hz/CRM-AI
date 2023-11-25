@@ -1,0 +1,9 @@
+.sidebar-link.clicked .ant-list-item .ant-list-item-meta-description {
+  opacity: 1.5;
+  transition: opacity 0.5s ease;
+}
+
+.sidebar-link .ant-list-item .ant-list-item-meta-description {
+  opacity: 0.2;
+  transition: opacity 0.5s ease;
+}
