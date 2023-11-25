@@ -5,16 +5,16 @@ import { Avatar, List } from "antd";
 
 const data = [
   {
-    title: "Ant Design Title 1",
+    title: "John Smith 1",
   },
   {
-    title: "Ant Design Title 2",
+    title: "John Smith 2",
   },
   {
-    title: "Ant Design Title 3",
+    title: "John Smith 3",
   },
   {
-    title: "Ant Design Title 4",
+    title: "John Smith 4",
   },
 ];
 
@@ -31,7 +31,7 @@ const SideBar = () => (
             />
           }
           title={<a href="https://ant.design">{item.title}</a>}
-          description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+          description="I am a customer, a using for support applications, is refined by Optimus Team"
         />
       </List.Item>
     )}

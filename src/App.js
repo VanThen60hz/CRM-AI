@@ -5,7 +5,7 @@ import SideBar from "./components/Sidebar";
 import "@chatui/core/dist/index.css";
 import "./App.css";
 import { BoldOutlined, Row, Col } from "antd";
-// import Info from "./components/Info";
+import Info from "./components/Info";
 
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,6 +21,7 @@ export default function App() {
         setcont(res.data);
       });
   };
+
   function handleSend(type, val) {
     if (type === "text" && val.trim()) {
       appendMsg({
@@ -164,7 +165,9 @@ export default function App() {
             </div>
           </div>
         </Col>
-        <Col span={4}>{/* <Info /> */}</Col>
+        <Col span={4}>
+          <Info />
+        </Col>
       </Row>
 
       <div className="info"></div>
