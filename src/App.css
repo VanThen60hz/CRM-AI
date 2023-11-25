@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,7 +35,7 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
 
 .d-flex {
   display: flex;
@@ -43,4 +43,8 @@
 
 .Composer-inputWrap textarea {
   height: 100px;
+}
+
+.ChatApp {
+  height: 100vh;
 }

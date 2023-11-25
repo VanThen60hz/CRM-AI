@@ -52,25 +52,23 @@ export default function App() {
 
   return (
     <div className="app-container">
-      <div className="d-f">
-        <Row>
-          <Col span={4}>
-            <SideBar />
-          </Col>
-          <Col span={16}>
-            <Chat
-              navbar={{ title: "Assistant chat" }}
-              messages={messages}
-              renderMessageContent={renderMessageContent}
-              placeholder="Type here..."
-              onSend={handleSend}
-            />
-          </Col>
-          <Col span={4}></Col>
-        </Row>
-      </div>
+      <Row>
+        <Col span={4}>
+          <SideBar />
+        </Col>
+        <Col span={16}>
+          <Chat
+            navbar={{ title: "Assistant chat" }}
+            messages={messages}
+            renderMessageContent={renderMessageContent}
+            placeholder="Type here..."
+            onSend={handleSend}
+          />
+        </Col>
+        <Col span={4}></Col>
+      </Row>
 
-      <div className="info"></div>
+      {/* <div className="info"></div> */}
     </div>
   );
 }
