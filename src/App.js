@@ -12,27 +12,36 @@ export default function App() {
   const { messages, appendMsg, setTyping } = useMessages([]);
   const [cont, setcont] = useState("11111");
 
-  useEffect(() => {
-    // Dynamically add buttons to ChatFooter if they don't exist
-    const chatFooter = document.querySelector(".Composer");
-    const existingButtons = chatFooter.querySelector(".inline");
+  const [buttonsAdded, setButtonsAdded] = useState(false);
 
-    if (!existingButtons) {
-      const htmlContent = `
-        <div className="inline">
-          <button type="button" class="btn btn-link text-dark">
-            <i class="fa-solid fa-italic"></i>
-          </button>
-          <button type="button" class="btn btn-link text-dark">
-            <i class="fa-solid fa-bold"></i>
-          </button>
-          <button type="button" class="btn btn-link text-dark">
-            <i class="fa-solid fa-wand-magic-sparkles"></i>
-          </button>
-        </div>
-      `;
-      chatFooter.insertAdjacentHTML("beforebegin", htmlContent);
+  // Function to add buttons dynamically
+  const addButtons = () => {
+    if (!buttonsAdded) {
+      const chatFooter = document.querySelector(".Composer");
+      const existingButtons = chatFooter.querySelector(".inline");
+
+      if (!existingButtons) {
+        const htmlContent = `
+          <div className="inline">
+            <button type="button" class="btn btn-link text-dark">
+              <i class="fa-solid fa-italic"></i>
+            </button>
+            <button type="button" class="btn btn-link text-dark">
+              <i class="fa-solid fa-bold"></i>
+            </button>
+            <button type="button" class="btn btn-link text-dark">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </button>
+          </div>
+        `;
+        chatFooter.insertAdjacentHTML("beforebegin", htmlContent);
+        setButtonsAdded(true);
+      }
     }
+  };
+
+  useEffect(() => {
+    addButtons();
   }, []);
 
   function handleSend(type, val) {
@@ -65,7 +74,7 @@ export default function App() {
         </Col>
         <Col span={16}>
           <Chat
-            navbar={{ title: "CRM chat" }}
+            navbar={{ title: "CRM_AI chat" }}
             messages={messages}
             renderMessageContent={renderMessageContent}
             placeholder="Type here..."
