@@ -44,6 +44,15 @@ export default function App() {
     addButtons();
   }, []);
 
+  const getdata = (val) => {
+    axios
+      .get("http://172.174.71.39:3000/chat?q=" + val + "&id=chatgptwebb", {})
+      .then((res) => {
+        console.log(res.data);
+        console.log("data", cont);
+        setcont(res.data);
+      });
+  };
   function handleSend(type, val) {
     if (type === "text" && val.trim()) {
       appendMsg({
@@ -51,13 +60,22 @@ export default function App() {
         content: { text: val },
         position: "right",
       });
-
+      // getdata(val);
       axios
         .get("http://172.174.71.39:3000/chat?q=" + val + "&id=chatgptwebb", {})
         .then((res) => {
+          console.log(res.data);
+          console.log("data", cont);
           setcont(res.data);
-          setTyping(true);
+          setTimeout(() => {
+            console.log("data_now", cont);
+            appendMsg({
+              type: "text",
+              content: { text: res.data },
+            });
+          }, 1000);
         });
+      setTyping(true);
     }
   }
 
