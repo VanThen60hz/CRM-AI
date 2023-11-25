@@ -22,30 +22,52 @@ export default function App() {
       });
   };
 
-  function handleSend(type, val) {
-    if (type === "text" && val.trim()) {
-      appendMsg({
-        type: "text",
-        content: { text: val },
-        position: "right",
-      });
-      // getdata(val);
-      axios
-        .get("http://172.174.71.39:3000/chat?q=" + val + "&id=chatgptwebb", {})
-        .then((res) => {
-          console.log(res.data);
-          console.log("data", cont);
-          setcont(res.data);
-          setTimeout(() => {
-            console.log("data_now", cont);
-            appendMsg({
-              type: "text",
-              content: { text: res.data },
-            });
-          }, 1000);
-        });
-      setTyping(true);
+  function handleSend() {
+    const messageInput = document.getElementById("messageInput");
+    const messageContent = messageInput.value.trim();
+
+    if (messageContent !== "") {
+      // Add logic to handle sending the message
+      // For example, you can append the message to the MessageContainer
+      const messageContainer = document.querySelector(".MessageContainer");
+      const newMessage = createMessageElement(messageContent, "right");
+      messageContainer.appendChild(newMessage);
+
+      // Clear the input field
+      messageInput.value = "";
     }
+  }
+
+  function createMessageElement(content, position) {
+    const messageElement = document.createElement("div");
+    messageElement.classList.add("Message", position);
+
+    // Add the message content to the Bubble
+    const bubbleElement = document.createElement("div");
+    bubbleElement.classList.add("Bubble", "text");
+    bubbleElement.innerText = content;
+
+    // Add the Bubble to the Message
+    const messageContentElement = document.createElement("div");
+    messageContentElement.classList.add("Message-content");
+    messageContentElement.appendChild(bubbleElement);
+
+    // Add the Message-content to the Message-inner
+    const messageInnerElement = document.createElement("div");
+    messageInnerElement.classList.add("Message-inner");
+    messageInnerElement.appendChild(messageContentElement);
+
+    // Add the Message-inner to the Message-main
+    const messageMainElement = document.createElement("div");
+    messageMainElement.classList.add("Message-main");
+    messageMainElement.appendChild(messageInnerElement);
+
+    // Add the Time element to the Message-meta if needed
+
+    // Assemble all parts into the Message
+    messageElement.appendChild(messageMainElement);
+
+    return messageElement;
   }
 
   function renderMessageContent(msg) {
@@ -60,82 +82,41 @@ export default function App() {
           <SideBar />
         </Col>
         <Col span={16}>
-          <Chat
-            navbar={{ title: "Assistant chat" }}
+          {/* <Chat
+            navbar={{ title: "CMR_AI chat" }}
             messages={messages}
             renderMessageContent={renderMessageContent}
             placeholder="Type here..."
             onSend={handleSend}
-          />
+          /> */}
           <div class="ChatApp">
             <header class="Navbar">
               <div class="Navbar-left"></div>
               <div class="Navbar-main">
-                <h2 class="Navbar-title">Assistant chat</h2>
+                <h2 class="Navbar-title">CRM_AI chat</h2>
               </div>
               <div class="Navbar-right"></div>
             </header>
-            <div class="MessageContainer" tabindex="-1">
-              <div class="PullToRefresh">
-                <div class="PullToRefresh-inner">
-                  <div class="PullToRefresh-content">
-                    <div class="PullToRefresh-indicator"></div>
-                    <div class="MessageList">
-                      <div
-                        class="Message right"
-                        data-id="blkutvfv26vi"
-                        data-type="text"
-                      >
-                        <div class="Message-meta">
-                          <time
-                            class="Time"
-                            datetime="2023-11-25T07:34:08.303Z"
-                          >
-                            {/* 14:34 */}
-                          </time>
-                        </div>
-                        <div class="Message-main">
-                          <div class="Message-inner">
-                            <div
-                              class="Message-content"
-                              role="alert"
-                              aria-live="assertive"
-                              aria-atomic="false"
-                            >
-                              <div class="Bubble text" data-type="text"></div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        class="Message left"
-                        data-id="_TYPING_"
-                        data-type="typing"
-                      >
-                        <div class="Message-main">
-                          <div class="Message-inner">
-                            <div
-                              class="Message-content"
-                              role="alert"
-                              aria-live="assertive"
-                              aria-atomic="false"
-                            >
-                              <div class="Bubble typing" data-type="typing">
-                                <div class="Typing" aria-busy="true">
-                                  <div class="Typing-dot"></div>
-                                  <div class="Typing-dot"></div>
-                                  <div class="Typing-dot"></div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div
+              className="MessageContainer"
+              style={{
+                marginRight: "2.5%",
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                height: "auto",
+              }}
+              tabIndex="-1"
+            >
+              <div
+                id="messageList"
+                className="MessageList"
+                style={{ overflow: "auto", flex: "1" }}
+              >
+                {/* Messages will be appended here */}
               </div>
             </div>
+
             <div class="ChatFooter">
               <div class="Composer">
                 <div class="Composer-inputWrap">
@@ -144,11 +125,9 @@ export default function App() {
                       <i class="fa-solid fa-italic"></i>
                     </button>
                     <button type="button" class="btn btn-link text-dark">
-                      {" "}
                       <i class="fa-solid fa-bold"></i>
                     </button>
                     <button type="button" class="btn btn-link text-dark">
-                      {" "}
                       <i class="fa-solid fa-wand-magic-sparkles"></i>
                     </button>
                     <textarea
@@ -157,8 +136,22 @@ export default function App() {
                       placeholder="Type here..."
                       rows="1"
                       enterkeyhint="send"
-                      // onKeyDown={handleSend}
+                      id="messageInput"
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" && !e.shiftKey) {
+                          e.preventDefault();
+                          handleSend();
+                        }
+                      }}
                     ></textarea>
+                    <button
+                      style={{ display: "none" }}
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={handleSend}
+                    >
+                      Send
+                    </button>
                   </div>
                 </div>
               </div>

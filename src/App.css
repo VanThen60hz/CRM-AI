@@ -47,8 +47,12 @@
 
 .ChatApp {
   height: 100vh;
+  overflow: hidden;
 }
 
 .Btn.Btn--primary.Composer-sendBtn {
   display: none;
+}
+
+.MessageList {
 }
