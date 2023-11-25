@@ -87,7 +87,9 @@ export default function App() {
               <div class="Composer">
                 <div class="Composer-inputWrap">
                   <div class="">
-                    <p>abc</p>
+                  <button type="button" class="btn btn-link text-dark" ><i class="fa-solid fa-italic"></i></button>
+                  <button type="button" class="btn btn-link text-dark" > <i class="fa-solid fa-bold"></i></button>
+                  <button type="button" class="btn btn-link text-dark" > <i class="fa-solid fa-wand-magic-sparkles"></i></button>
                     <textarea
                       class="Input Input--outline Composer-input"
                       type="text"
