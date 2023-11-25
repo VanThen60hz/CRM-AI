@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.d-flex {
+  display: flex;
+}
+
+.Composer-inputWrap textarea {
+  height: 100px;
+}

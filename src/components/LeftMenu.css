@@ -1,0 +1,15 @@
+.left-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60px; /* Adjust as needed */
+  background-color: #f0f0f0; /* Set background color */
+  padding: 20px 0;
+}
+
+.chat-icon {
+  margin-bottom: 20px; /* Adjust spacing between icons */
+  cursor: pointer;
+  font-size: 24px;
+  color: #333; /* Set icon color */
+}
