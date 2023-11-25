@@ -1,26 +1,39 @@
 import "@chatui/core/dist/index.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Chat, { Bubble, useMessages } from "@chatui/core";
 import SideBar from "./components/Sidebar";
-import "@chatui/core/dist/index.css";
 import "./App.css";
-import { BoldOutlined, Row, Col } from "antd";
+import { Row, Col } from "antd";
 import Info from "./components/Info";
 
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 export default function App() {
   const { messages, appendMsg, setTyping } = useMessages([]);
   const [cont, setcont] = useState("11111");
-  const getdata = (val) => {
-    axios
-      .get("http://172.174.71.39:3000/chat?q=" + val + "&id=chatgptwebb", {})
-      .then((res) => {
-        console.log(res.data);
-        console.log("data", cont);
-        setcont(res.data);
-      });
-  };
+
+  useEffect(() => {
+    // Dynamically add buttons to ChatFooter if they don't exist
+    const chatFooter = document.querySelector(".Composer");
+    const existingButtons = chatFooter.querySelector(".inline");
+
+    if (!existingButtons) {
+      const htmlContent = `
+        <div className="inline">
+          <button type="button" class="btn btn-link text-dark">
+            <i class="fa-solid fa-italic"></i>
+          </button>
+          <button type="button" class="btn btn-link text-dark">
+            <i class="fa-solid fa-bold"></i>
+          </button>
+          <button type="button" class="btn btn-link text-dark">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </button>
+        </div>
+      `;
+      chatFooter.insertAdjacentHTML("beforebegin", htmlContent);
+    }
+  }, []);
 
   function handleSend(type, val) {
     if (type === "text" && val.trim()) {
@@ -29,22 +42,13 @@ export default function App() {
         content: { text: val },
         position: "right",
       });
-      // getdata(val);
+
       axios
         .get("http://172.174.71.39:3000/chat?q=" + val + "&id=chatgptwebb", {})
         .then((res) => {
-          console.log(res.data);
-          console.log("data", cont);
           setcont(res.data);
-          setTimeout(() => {
-            console.log("data_now", cont);
-            appendMsg({
-              type: "text",
-              content: { text: res.data },
-            });
-          }, 1000);
+          setTyping(true);
         });
-      setTyping(true);
     }
   }
 
