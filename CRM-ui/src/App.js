@@ -118,7 +118,7 @@ export default function App() {
           type: "text",
           content: { text: res.data },
         });
-      }, 100);
+      }, 10);
     } catch (error) {
       console.error("Error fetching email:", error);
     }
