@@ -98,6 +98,8 @@ export default function App() {
 
   const handleItemClick = (index) => {
     setSelectedItemIndex(index);
+    // Extract the email from the selected item and set it
+    setEmail(data[index].email);
   };
 
   const fetchEmail = async (val, email) => {
